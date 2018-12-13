@@ -33,7 +33,8 @@ public class EntryAdapter extends RecyclerView.Adapter<EntryAdapter.EntryViewHol
             topCard = v.findViewById(R.id.top_card);
             mainCard = v.findViewById(R.id.main_card);
             thumbnail = mainCard.findViewById(R.id.thumbnail);
-           // author = mainCard.findViewById(R.id.author);
+            author = mainCard.findViewById(R.id.author);
+            label = topCard.findViewById(R.id.label);
         }
     }
 
@@ -48,7 +49,7 @@ public class EntryAdapter extends RecyclerView.Adapter<EntryAdapter.EntryViewHol
                                                      int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.standard_entry_item, parent, false);
+                .inflate(R.layout.entry_item_constraints, parent, false);
 
         EntryViewHolder vh = new EntryViewHolder(v);
         return vh;
@@ -63,6 +64,8 @@ public class EntryAdapter extends RecyclerView.Adapter<EntryAdapter.EntryViewHol
         holder.label.setText(mDataset[position].getLabel());
         holder.textContent.setText(mDataset[position].getTextContent());
         holder.thumbnail.setImageDrawable(LoadImageFromWebOperations(mDataset[position].getThumbnail()));
+        holder.author.setText(mDataset[position].getAuthor());
+        holder.label.setText(mDataset[position].getLabel());
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -74,7 +77,7 @@ public class EntryAdapter extends RecyclerView.Adapter<EntryAdapter.EntryViewHol
     public static Drawable LoadImageFromWebOperations(String url) {
         try {
             InputStream is = (InputStream) new URL(url).getContent();
-            Drawable d = Drawable.createFromStream(is, "src name");
+            Drawable d = Drawable.createFromStream(is, "thumbnail");
             return d;
         } catch (Exception e) {
             return null;

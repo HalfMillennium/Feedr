@@ -1,16 +1,24 @@
 package com.digitalnode.glc22.feedr;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
+
 public class Entry implements EntryInterface {
     private String source = null;
     private String title = null;
     private String author = null;
-    private String dateCreated = null;
+    private Date dateCreated = null;
     private String thumbnail = null;
     private String textContent = null;
     private String label = null;
 
     /*** for the sake of testing, an entry will only consist of source, title, and dateCreated ***/
-    public Entry(String source, String title, String author, String thumbnail, String dateCreated, String textContent, String label) {
+    public Entry(String source, String title, String author, String thumbnail, Date dateCreated, String textContent, String label) {
         this.source = source;
         this.title = title;
         this.author = author;
@@ -28,7 +36,7 @@ public class Entry implements EntryInterface {
         return source;
     }
 
-    public String getDateCreated() {
+    public Date getDateCreated() {
         return dateCreated;
     }
 

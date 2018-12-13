@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.digitalnode.glc22.feedr.Sorts.SortByDate;
+
 import net.dean.jraw.android.AndroidHelper;
 import net.dean.jraw.android.AppInfoProvider;
 import net.dean.jraw.android.ManifestAppInfoProvider;
@@ -19,6 +21,8 @@ import net.dean.jraw.models.TimePeriod;
 import net.dean.jraw.oauth.AccountHelper;
 import net.dean.jraw.pagination.DefaultPaginator;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,10 +31,6 @@ public class MainActivity extends AppCompatActivity {
 
     private SectionsStatePagerAdapter mSectionsStatePagerAdapter;
     private ViewPager mViewPager;
-    private static AccountHelper accountHelper;
-    private static SharedPreferencesTokenStore tokenStore;
-    private DefaultPaginator<Submission> frontPage;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,46 +43,8 @@ public class MainActivity extends AppCompatActivity {
         //setup the pager
         setupViewPager(mViewPager);
 
-        // Get UserAgent and OAuth2 data from AndroidManifest.xml
-        AppInfoProvider provider = new ManifestAppInfoProvider(this);
-
-        // Ideally, this should be unique to every device
-        UUID deviceUuid = UUID.randomUUID();
-
-        // Store our access tokens and refresh tokens in shared preferences
-        tokenStore = new SharedPreferencesTokenStore(this);
-        // Load stored tokens into memory
-        tokenStore.load();
-        // Automatically save new tokens as they arrive
-        tokenStore.setAutoPersist(true);
-
-        // An AccountHelper manages switching between accounts and into/out of userless mode.
-        accountHelper = AndroidHelper.accountHelper(provider, deviceUuid, tokenStore);
-
-        // Every time we use the AccountHelper to switch between accounts (from one account to
-        // another, or into/out of userless mode), call this function
-        accountHelper.onSwitch(redditClient -> {
-            // By default, JRAW logs HTTP activity to System.out. We're going to use Log.i()
-            // instead.
-            LogAdapter logAdapter = new SimpleAndroidLogAdapter(Log.INFO);
-
-            // We're going to use the LogAdapter to write down the summaries produced by
-            // SimpleHttpLogger
-            redditClient.setLogger(
-                    new SimpleHttpLogger(SimpleHttpLogger.DEFAULT_LINE_LENGTH, logAdapter));
-            frontPage = redditClient.frontPage()
-                    .sorting(SubredditSort.TOP)
-                    .timePeriod(TimePeriod.DAY)
-                    .limit(30)
-                    .build();
-
-            return null;
-        });
-
-        Listing<Submission> submissions = frontPage.next();
-        for (Submission s : submissions) {
-
-        }
+        ArrayList<Entry> entryArrayList = new ArrayList<>();
+        Collections.sort(entryArrayList, new SortByDate());
 
     }
 

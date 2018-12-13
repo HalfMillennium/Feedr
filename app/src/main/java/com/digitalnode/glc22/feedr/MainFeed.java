@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,12 +49,37 @@ public class MainFeed extends Fragment {
     private static AccountHelper accountHelper;
     private static SharedPreferencesTokenStore tokenStore;
     private DefaultPaginator<Submission> frontPage;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
+    private ArrayList<Entry> entryList;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         View view  = inflater.inflate(R.layout.main_feed_layout, container, false);
         Log.d(TAG, "onCreateView: started.");
+
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
+
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        mRecyclerView.setHasFixedSize(true);
+
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(getContext());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        Entry[] arr = new Entry[entryList.size()];
+
+        for(int i = 0; i < arr.length; i++)
+        {
+            arr[i] = entryList.get(i);
+        }
+        // specify an adapter (see also next example)
+        mAdapter = new EntryAdapter(arr);
+        mRecyclerView.setAdapter(mAdapter);
 
         setUpReddit();
 
@@ -98,9 +125,9 @@ public class MainFeed extends Fragment {
         });
 
         Listing<Submission> submissions = frontPage.next();
-        ArrayList<Entry> entryList = new ArrayList<>();
+        entryList = new ArrayList<>();
         for (Submission s : submissions) {
-            Entry entry = new Entry("RED", s.getTitle(), s.getCreated().toString(), s.getAuthor());
+            Entry entry = new Entry("RED", s.getTitle(), s.getAuthor(), s.getThumbnail(), s.getCreated(), s.getSelfText(), s.getSubreddit());
             entryList.add(entry);
         }
 

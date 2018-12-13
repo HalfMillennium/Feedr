@@ -45,6 +45,7 @@
                     app:layout_constraintRight_toLeftOf="@id/top_card_vert"/>
 
                 <TextView
+                    android:id="@+id/label"
                     android:layout_width="349dp"
                     android:layout_height="20dp"
                     android:layout_marginLeft="30dp"
@@ -121,7 +122,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.43" />
+                        app:layout_constraintGuide_percent="0.32" />
 
                     <android.support.constraint.Guideline
                         android:id="@+id/hor_guideline_above"
@@ -132,15 +133,44 @@
 
                     <TextView
                         android:id="@+id/author"
-                        android:paddingTop="4dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/darkRedditOrange"
                         android:fontFamily="@font/volte_regular"
-                        app:layout_constraintTop_toBottomOf="@id/hor_guideline_above"
+                        android:gravity="center_vertical"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="1dp"
+                        android:text="/u/TheFiveHundred"
+                        android:textColor="@color/darkRedditOrange"
+                        android:textSize="10sp"
                         app:layout_constraintLeft_toRightOf="@id/ver_guideline_subtitle"
-                        android:textSize="11sp"
-                        android:text="/u/TheFiveHundred" />
+                        app:layout_constraintTop_toBottomOf="@id/hor_guideline_above" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toEndOf="@id/author"
+                        app:layout_constraintEnd_toStartOf="@id/date_created"
+                        app:layout_constraintLeft_toRightOf="@id/ver_guideline_subtitle"
+                        app:layout_constraintTop_toBottomOf="@id/hor_guideline_above"
+                        android:paddingTop="2dp"
+                        android:textColor="@color/darkRedditOrange"
+                        android:textSize="10sp"
+                        android:text="|"/>
+
+                    <TextView
+                        android:id="@+id/date_created"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="116dp"
+                        android:fontFamily="@font/volte_regular"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="1dp"
+                        android:paddingTop="4dp"
+                        android:text="12.12.2018"
+                        android:textColor="@color/darkRedditOrange"
+                        android:textSize="10sp"
+                        app:layout_constraintLeft_toRightOf="@id/ver_guideline_subtitle"
+                        app:layout_constraintTop_toBottomOf="@id/hor_guideline_above" />
                 </android.support.constraint.ConstraintLayout>
 
                 <LinearLayout
@@ -157,9 +187,6 @@
                         android:layout_marginStart="4dp"
                         android:layout_marginBottom="3dp"
                         android:tint="@color/redditOrange"
-                        app:layout_constraintBottom_toTopOf="@+id/hor_guideline_below"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/above_text_content"
                         app:srcCompat="@mipmap/ic_launcher" />
 
                     <TextView
@@ -175,7 +202,6 @@
                         android:textColor="@color/darkGray"
                         android:textSize="12sp"
                         app:layout_constraintBottom_toTopOf="@+id/hor_guideline_below"
-                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toEndOf="@+id/thumbnail"
                         app:layout_constraintTop_toBottomOf="@id/above_text_content"
