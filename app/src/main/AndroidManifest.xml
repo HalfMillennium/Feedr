@@ -19,13 +19,13 @@
 
         <meta-data
             android:name="net.dean.jraw.android.REDDIT_USERNAME"
-            android:value="(...)" />
+            android:value="TheFiveHundred" />
         <meta-data
             android:name="net.dean.jraw.android.CLIENT_ID"
-            android:value="(...)" />
+            android:value="yFjlO_gh1e2uBw" />
         <meta-data
             android:name="net.dean.jraw.android.REDIRECT_URL"
-            android:value="(...)" />
+            android:value="https://github.com/HalfMillennium/Feedr" />
     </application>
 
 </manifest>

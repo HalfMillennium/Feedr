@@ -4,17 +4,17 @@ import com.digitalnode.glc22.feedr.Entry;
 
 import java.util.Comparator;
 
-public class SortByDate implements Comparator<Entry>
+public class SortByOldest implements Comparator<Entry>
 {
     // Used for sorting in ascending order of
     // roll name
     public int compare(Entry a, Entry b)
     {
-        long diffInMillies = Math.abs(a.getDateCreated().getTime() - b.getDateCreated().getTime());
+        long diffInMillies = a.getDateCreated().getTime() - b.getDateCreated().getTime();
 
         if(diffInMillies >= 0)
-            return 1;
-        else
             return -1;
+        else
+            return 1;
     }
 }

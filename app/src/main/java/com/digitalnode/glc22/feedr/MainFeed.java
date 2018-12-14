@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import net.dean.jraw.RedditClient;
+import net.dean.jraw.Version;
 import net.dean.jraw.android.AndroidHelper;
 import net.dean.jraw.android.AppInfoProvider;
 import net.dean.jraw.android.ManifestAppInfoProvider;
@@ -45,7 +46,7 @@ import java.util.UUID;
  */
 
 public class MainFeed extends Fragment {
-    private static final String TAG = "Fragment1";
+    private static final String TAG = "MainFeed";
     private static AccountHelper accountHelper;
     private static SharedPreferencesTokenStore tokenStore;
     private DefaultPaginator<Submission> frontPage;
@@ -73,6 +74,8 @@ public class MainFeed extends Fragment {
 
         Entry[] arr = new Entry[entryList.size()];
 
+        setUpReddit();
+
         for(int i = 0; i < arr.length; i++)
         {
             arr[i] = entryList.get(i);
@@ -80,8 +83,6 @@ public class MainFeed extends Fragment {
         // specify an adapter (see also next example)
         mAdapter = new EntryAdapter(arr);
         mRecyclerView.setAdapter(mAdapter);
-
-        setUpReddit();
 
         return view;
     }
@@ -124,11 +125,31 @@ public class MainFeed extends Fragment {
             return null;
         });
 
-        Listing<Submission> submissions = frontPage.next();
-        entryList = new ArrayList<>();
-        for (Submission s : submissions) {
-            Entry entry = new Entry("RED", s.getTitle(), s.getAuthor(), s.getThumbnail(), s.getCreated(), s.getSelfText(), s.getSubreddit());
-            entryList.add(entry);
+        // You'll want to change this for your specific OAuth2 app
+        Credentials credentials = Credentials.script("<username>", "<password>", "<client ID>", "<client secret>");
+
+        // Construct our NetworkAdapter
+        UserAgent userAgent = new UserAgent("bot", "net.dean.jraw.example.script", Version.get(), "thatJavaNerd");
+        NetworkAdapter http = new OkHttpNetworkAdapter(userAgent);
+
+        // Authenticate our client
+        RedditClient reddit = OAuthHelper.automatic(http, credentials);
+
+        // Browse through the top posts of the last month, requesting as much data as possible per request
+        DefaultPaginator<Submission> paginator = reddit.frontPage()
+                .limit(Paginator.RECOMMENDED_MAX_LIMIT)
+                .sorting(SubredditSort.TOP)
+                .timePeriod(TimePeriod.MONTH)
+                .build();
+
+        // Request the first page
+        Listing<Submission> firstPage = paginator.next();
+
+        for (Submission post : firstPage) {
+            if (post.getDomain().contains("imgur.com")) {
+                System.out.println(String.format("%s (/r/%s, %s points) - %s",
+                        post.getTitle(), post.getSubreddit(), post.getScore(), post.getUrl()));
+            }
         }
 
         /** This will be used for getting all subreddits the person is subscribed to **/
