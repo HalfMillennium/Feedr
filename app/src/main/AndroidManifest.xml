@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.digitalnode.glc22.feedr">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -18,14 +20,17 @@
         </activity>
 
         <meta-data
-            android:name="net.dean.jraw.android.REDDIT_USERNAME"
+            android:name="com.digitalnode.glc22.feedr.REDDIT_USERNAME"
             android:value="TheFiveHundred" />
         <meta-data
-            android:name="net.dean.jraw.android.CLIENT_ID"
+            android:name="com.digitalnode.glc22.feedr.CLIENT_ID"
             android:value="yFjlO_gh1e2uBw" />
         <meta-data
-            android:name="net.dean.jraw.android.REDIRECT_URL"
+            android:name="com.digitalnode.glc22.feedr.REDIRECT_URL"
             android:value="https://github.com/HalfMillennium/Feedr" />
+
+        <activity android:name=".AccountsActivity" />
+        <activity android:name=".logins.reddit.RedditLoginActivity"></activity>
     </application>
 
 </manifest>

@@ -9,4 +9,8 @@
     <color name="offBlack">#242424</color>
     <color name="cardColor">#DCDCDC</color>
     <color name="darkGray">#3F3F3F</color>
+    <color name="offWhite">#f9f9f9</color>
+    <color name="lightRedditOrange">#BFFF5700</color>
+    <color name="lightTwitterBlue">#BF1DA1F2</color>
+    <color name="lightGray">#C0C0C0</color>
 </resources>

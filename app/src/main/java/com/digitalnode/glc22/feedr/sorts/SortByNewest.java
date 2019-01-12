@@ -1,4 +1,4 @@
-package com.digitalnode.glc22.feedr.Sorts;
+package com.digitalnode.glc22.feedr.sorts;
 
 import com.digitalnode.glc22.feedr.Entry;
 

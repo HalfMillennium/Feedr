@@ -3,4 +3,16 @@
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras congue leo urna, ut aliquam nunc lobortis eget. Nunc hendrerit suscipit nibh. Sed aliquet in nisl bibendum vulputate...</string>
     <string name="configure_acc">Configure Accounts</string>
     <string name="configure_feed">My Feed</string>
+    <string name="configure_reddit">Reddit Account</string>
+    <string name="configure_twitter">Twitter Account</string>
+    <string name="configure_instagram">Instagram Account</string>
+    <string name="configure_facebook">Facebook Account</string>
+    <string name="reconf_reddit">Reconfigure Reddit</string>
+    <string name="reconf_twitter">Reconfigure Twitter</string>
+
+    <!-- RedditLoginActivity Strings -->
+    <string name="reddit_login_access_denied_error">
+        You must click on \"allow\" to complete the sign-in process.
+        The app cannot function correctly without the requested permissions.
+    </string>
 </resources>
