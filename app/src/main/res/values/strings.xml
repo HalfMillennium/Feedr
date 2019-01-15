@@ -9,6 +9,7 @@
     <string name="configure_facebook">Facebook Account</string>
     <string name="reconf_reddit">Reconfigure Reddit</string>
     <string name="reconf_twitter">Reconfigure Twitter</string>
+    <string name="no_sources_conf">No Sources Configured!</string>
 
     <!-- RedditLoginActivity Strings -->
     <string name="reddit_login_access_denied_error">

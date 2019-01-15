@@ -108,12 +108,13 @@ public class MainFeed extends Fragment {
         // month, 50 at a time
 
         // Since Paginator implements Iterator, you can use it just how you would expect to, using next() and hasNext()
-        /*List<Submission> submissions = frontPage.next();
+/*        List<Submission> submissions = frontPage.next();
         for (Submission s : submissions) {
             // Print some basic stats about the posts
             Entry e = new Entry("RED", s.getTitle(), s.getAuthor(), s.getThumbnail(), s.getCreated(), s.getSelftext(), s.getSubredditName());
             entryList.add(e);
         }*/
+
         for(int i = 0; i < 10; i++)
         {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
